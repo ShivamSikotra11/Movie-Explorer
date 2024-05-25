@@ -7,29 +7,10 @@ import {
   Container,
   Typography,
   CircularProgress,
-  Box,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import MovieCard from "./MovieCard";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: theme.spacing(4),
-  },
-  searchContainer: {
-    marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(4),
-  },
-  heading: {
-    textAlign: "center",
-    color: theme.palette.primary.main,
-    fontWeight: 600,
-    fontFamily: '"Outfit", sans-serif',
-  },
-}));
-
 function MovieExplorer() {
-  const classes = useStyles();
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [title, setTitle] = useState("");
@@ -38,7 +19,7 @@ function MovieExplorer() {
   const getAllMovies = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:8000/get_movies");
+      const response = await axios.get("https://movie-explorer-backend-ten.vercel.app/get_movies");
       setMovies(response.data);
     } catch (error) {
       console.error("Error fetching movies:", error);
@@ -57,7 +38,7 @@ function MovieExplorer() {
 
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:8000/search", {
+      const response = await axios.get("https://movie-explorer-backend-ten.vercel.app/search", {
         params: { title },
       });
       setMovies(response.data.results);
@@ -73,14 +54,12 @@ function MovieExplorer() {
   };
 
   return (
-    <Container className={classes.root}>
-      {/* <Box className='mb-8 text-6xl  text-[#C39898]  font-outfit' > */}
-      <Typography variant="h2" className={classes.heading}>
+    <Container style={{ padding: "1rem" }}>
+      <Typography variant="h2" style={{ textAlign: "center", fontWeight: 500, fontFamily: "Sora, sans-serif", color: "#C39898", marginTop: "2rem", marginBottom: "2rem" }}>
         Movie Explorer
       </Typography>
-      {/* </Box> */}
       <form onSubmit={handleSearch}>
-        <Grid container spacing={2} className={classes.searchContainer}>
+        <Grid container spacing={2} style={{ marginTop: "2rem", marginBottom: "2rem" }}>
           <Grid item xs={12} md={8}>
             <TextField
               label="Search by Title"
@@ -91,12 +70,7 @@ function MovieExplorer() {
               inputRef={searchInputRef}
             />
           </Grid>
-          <Grid
-            item
-            xs={12}
-            md={4}
-            style={{ display: "flex", alignItems: "center" }}
-          >
+          <Grid item xs={12} md={4} style={{ display: "flex", alignItems: "center" }}>
             <Button variant="contained" color="primary" fullWidth type="submit">
               Search
             </Button>
@@ -105,27 +79,15 @@ function MovieExplorer() {
       </form>
 
       {loading ? (
-        <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          height="70vh"
-          width="100%"
-        >
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "70vh", width: "100%" }}>
           <CircularProgress size={50} />
-        </Box>
+        </div>
       ) : (
         <Grid container spacing={2}>
           {movies.length === 0 ? (
-            <Box
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              height="70vh"
-              width="100%"
-            >
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "70vh", width: "100%" }}>
               <Typography variant="h3">No movies found</Typography>
-            </Box>
+            </div>
           ) : (
             movies.map((movie, index) => (
               <Grid item xs={12} key={movie.id}>

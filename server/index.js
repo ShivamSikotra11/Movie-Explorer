@@ -5,7 +5,15 @@ const app = express();
 const port = 8000;
 
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
+app.use(cors(
+  {
+    origin:["https://movie-explorer-backend-ten.vercel.app/","http://localhost:8000","https://stock-monitoring.vercel.app","http://localhost:5173"],
+    methods:["GET","POST"],
+    credentials:true
+  }
+));
+
 
 const apiKey =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMzFlODlhMTIyMjcxZmMwMTNlMmM2NjdkNzRiYzNmOSIsInN1YiI6IjY2NTA1MDYyYWJkODlmMjA4N2VjNGE3MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.LdENaZFUSJJTiDfA6EERmCmzbH7K5JLHztVwHIOE9eE";

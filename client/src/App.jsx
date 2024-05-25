@@ -3,7 +3,7 @@ import MovieExplorer from "./components/MovieExplorer";
 
 const App = () => {
   return (
-    <div className="border border-black">
+    <div className="">
       <MovieExplorer />
     </div>
   );
