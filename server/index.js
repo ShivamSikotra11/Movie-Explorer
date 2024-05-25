@@ -11,7 +11,7 @@ const apiKey =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwMzFlODlhMTIyMjcxZmMwMTNlMmM2NjdkNzRiYzNmOSIsInN1YiI6IjY2NTA1MDYyYWJkODlmMjA4N2VjNGE3MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.LdENaZFUSJJTiDfA6EERmCmzbH7K5JLHztVwHIOE9eE";
 const headers = {
   accept: "application/json",
-  Authorization: Bearer ${apiKey},
+  Authorization: `Bearer ${apiKey}`,
 };
 
 app.get("/get_movies", async (req, res) => {
@@ -39,7 +39,7 @@ app.get("/get_movies", async (req, res) => {
 app.get('/search', async (req, res) => {
   const { title } = req.query;
   const apiKey = '031e89a122271fc013e2c667d74bc3f9';
-  let url = https://api.themoviedb.org/3/search/movie?query=${title}&api_key=${apiKey};
+  let url = `https://api.themoviedb.org/3/search/movie?query=${title}&api_key=${apiKey}`;
 
   try {
     const response = await axios.get(url);
@@ -55,5 +55,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(Server is running on http://localhost:${port});
+  console.log(`Server is running on http://localhost:${port}`);
 });
